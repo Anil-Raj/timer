@@ -1,0 +1,37 @@
+<html>
+
+<head>
+    <title>Timer</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="demo-wrapper section">
+            <div class="stick">
+                    <div class="input">
+                            <p id="timer" style="display:none"></p>
+                            <input name="time-input" type="text" class="time-input" id="time-input" value="20" autofocus="">
+                        </div>
+                        <div class="buttons">
+                            <p id="up" onclick="up()">Count Up</p>
+                            <p id="down" onclick="down()">Count Down </p>
+                            <p id="lap" onclick="lap()">Lap </p>
+                            <p id="pause" onclick="pause()">Pause </p>
+                            <p id="cancel" onclick="cancel()">Cancel </p>
+                            <p id="resume" onclick="resume()">Resume </p>
+                        </div>
+            </div>
+
+            <div class="lap w3-container">
+                <ul class="w3-ul w3-card" id="myUL">
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="script.js"></script>
+
+</html>
