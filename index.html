@@ -1,12 +1,9 @@
 <html>
-
 <head>
     <title>Timer</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
 </head>
-
 <body>
     <div class="container">
         <div class="demo-wrapper section">
@@ -16,8 +13,8 @@
                             <input name="time-input" type="text" class="time-input" id="time-input" value="20" autofocus="">
                         </div>
                         <div class="buttons">
-                            <p id="up" onclick="up()">Count Up</p>
-                            <p id="down" onclick="down()">Count Down </p>
+                            <p id="up" onclick="start(1)">Count Up</p>
+                            <p id="down" onclick="start(0)">Count Down </p>
                             <p id="lap" onclick="lap()">Lap </p>
                             <p id="pause" onclick="pause()">Pause </p>
                             <p id="cancel" onclick="cancel()">Cancel </p>
@@ -32,6 +29,6 @@
         </div>
     </div>
 </body>
+<script src="intervalTimer.js"></script>
 <script src="script.js"></script>
-
 </html>
