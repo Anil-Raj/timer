@@ -11,6 +11,7 @@ toMinSec = function(time) {
 };
 
 start = function(option) {
+    timer.clock = Timer.start(updateTimerUI,1000);
   timer.isCountUp = option;
   updateCountUpDownButton("none");
   updateResumeCancelButton("none");
@@ -22,7 +23,8 @@ start = function(option) {
     ? toMinSec(timer.time)
     : toMinSec(timer.duration - timer.time);
   document.getElementById("timer").innerHTML = time;
-  timer.clock = new IntervalTimer(updateTimerUI, 1000);
+//   timer.clock = new IntervalTimer(updateTimerUI, 1000);
+//   aa = new IntervalTimer(updateTimerUI2, 1000);
 };
 
 updateTimerUI = function() {
@@ -45,7 +47,8 @@ updateTimerUI = function() {
 };
 
 pause = function() {
-  timer.clock.pause();
+//   timer.clock.pause();
+  Timer.pause(timer.clock);
   document.getElementById("resume").style.display = "inline-block";
   document.getElementById("cancel").style.display = "inline-block";
   updateLapPauseButton("none");

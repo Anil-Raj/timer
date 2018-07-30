@@ -1,4 +1,4 @@
-<html>
+<!-- <html>
 <head>
     <title>Timer</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
@@ -30,5 +30,184 @@
     </div>
 </body>
 <script src="intervalTimer.js"></script>
+<script src="Timer.js"></script>
+
 <script src="script.js"></script>
+</html> -->
+<!-- <html>
+<head>
+<title>Multiple Javascript Stopwatches</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<script>
+function Timer(name,box){
+ function startTimer(){
+  this.d=new Date
+  this.interval=setInterval(this.name.displaytimer(),1000)
+ }
+ 
+ function displaytimer(){
+  now=new Date()
+  secs=Math.round((now.getTime()-this.d.getTime())/1000)+this.seconds
+  mins = parseInt(secs/60)
+  secs -=(mins*60);
+  document.getElementById(this.box+'Mins').value=(mins<10)?"0"+mins:mins;
+  document.getElementById(this.box+'Secs').value=(secs<10)?"0"+secs:secs;
+ }
+ 
+ function reset(){
+  clearInterval(this.interval)
+  this.seconds=0
+  document.getElementById(this.box).value=0
+ }
+ 
+ function stop(){
+  this.seconds=Math.round((now.getTime()-this.d.getTime())/1000)
+  clearInterval(this.interval)
+  this.interval='null'
+ }
+ 
+ function restart(){
+  if (this.interval=='null'){
+   this.d=new Date
+   this.interval=setInterval(this.name.displaytimer(),1000)
+ }
+}
+ 
+ this.start=startTimer
+ this.displaytimer=displaytimer
+ this.stop=stop
+ this.reset=reset
+ this.restart=restart
+ this.seconds=0
+ this.name=name
+ this.box=box
+}
+ 
+timer1=new Timer('timer1','timer1box')
+timer2=new Timer('timer2','timer2box')
+timer3=new Timer('timer3','timer3box')
+</script>
+ 
+<body>
+ 
+ <input id="timer1boxMins" value="0" size="3" style="font-size:16;border:2px solid red;text-align:right">:
+ <input id="timer1boxSecs" value="0" size="3" style="font-size:16;border:2px solid red;text-align:right"><br>
+ <input type="button" value="start" 
+ onclick="if (this.value=='start') { timer1.start(); this.value='stop'} else {timer1.stop(); this.value='start'}">
+ <input type="button" value="reset" onclick="timer1.reset();"><br><br> 
+ 
+ 
+ <input id="timer2boxMins" value="0" size="3" style="font-size:16;border:2px solid red;text-align:right">:
+ <input id="timer2boxSecs" value="0" size="3" style="font-size:16;border:2px solid red;text-align:right"><br>
+ <input type="button" value="start" 
+ onclick="if (this.value=='start') { timer2.start(); this.value='stop'} else {timer2.stop(); this.value='start'}">
+ <input type="button" value="reset" onclick="timer2.reset();"><br><br>  
+ 
+ 
+ <input id="timer3boxMins" value="0" size="3" style="font-size:16;border:2px solid red;text-align:right">:
+ <input id="timer3boxSecs" value="0" size="3" style="font-size:16;border:2px solid red;text-align:right"><br>
+ <input type="button" value="start" 
+ onclick="if (this.value=='start') { timer3.start(); this.value='stop'} else {timer3.stop(); this.value='start'}">
+ <input type="button" value="reset" onclick="timer3.reset();"><br><br> 
+ 
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html ng-app="StopWatch">
+<head>
+<meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <link rel="icon" href="favicon.ico"> -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- JavaScript libraries  -->
+<!--<script src="lib/jquery.min.js"></script>-->
+    
+<!-- JavaScript UI libraries  -->
+<!--<script src="lib/jquery-ui-1.10.3.custom.js"></script>
+<script src="lib/jquery-ui.js"></script>-->
+<!--<script src="js/lib/bootstrap.min.js"></script>-->
+<!-- <script type="text/javascript" src="js/lib/angular.js"></script> -->
+<script type="text/javascript" src="jstopwatch.js"></script>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<!--<script type="text/javascript" src="js/lib/angular-route.js"></script>-->
+<title>Stopwatch App</title>
+</head>
+<body>
+     <div id="header" class="navbar ">
+         <nav class="navbar navbar-default navbar-fixed-top">
+              <div class="container">
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="#">Stop Watch</a>
+                </div>
+              </div>
+        </nav>
+    </div>
+	 <div id="content" ng-controller="stopwatchCtrl">
+        <div class="container">
+      <div class="page-header center">
+        <h1>Stop Watch</h1>
+      </div>
+         <p class="lead"></p>
+         <div ng-repeat="stopWatch in stopWatches">
+             <div class="timer-instance">
+                 <span class="timer-badge"><span ng-if="stopWatch.time.hr<10">0</span>{{stopWatch.time.hr}}</span>:
+                 <span class="timer-badge"><span ng-if="stopWatch.time.min<10">0</span>{{stopWatch.time.min}}</span>:
+                 <span class="timer-badge"><span ng-if="stopWatch.time.sec<10">0</span>{{stopWatch.time.sec}}</span>:
+                 <span class="timer-badge"><span ng-if="stopWatch.time.mSec<10">0</span>{{stopWatch.time.mSec}}</span><br/>
+            </div>
+             <div class="button-holder">
+              <button class="btn btn-success" ng-disabled="stopWatch.status=='stopped' || stopWatch.status=='started'" ng-click="stopWatch.start()">Start</button>
+              <button class="btn btn-info" ng-disabled="stopWatch.status=='stopped' || stopWatch.status=='init'" ng-click="stopWatch.lap()">Split</button>
+              <button class="btn btn-danger" ng-disabled="stopWatch.status=='init'" ng-click="stopWatch.stop($index)" ng-hide="stopWatch.status=='stopped'">Stop</button>
+             <button class="btn btn-danger" ng-show="stopWatch.status=='stopped'" ng-click="stopWatch.reset()">Reset</button>
+             </div>
+              <br/>
+             <!-- <table ng-show="stopWatch.laps.length" class="table table-bordered table-striped splitTimes"> -->
+                <tr>
+                  <th colspan="3">Sr. No</td>
+                  <th colspan="6">Total Duration</td>
+                  <th colspan="6">Lap Duration</td>
+                </tr>
+              <!-- <tr ng-repeat="lap in stopWatch.laps[0]"> -->
+                 <td colspan="3">#{{$index+1}}</td>
+                 <td colspan="6">
+                     <span><span ng-if="stopWatch.laps[0].totalDuration.hr<10">0</span>{{lap.totalDuration.hr}}</span>:
+                     <span><span ng-if="stopWatch.laps[0].totalDuration.min<10">0</span>{{lap.totalDuration.min}}</span>:
+                     <span><span ng-if="stopWatch.laps[0].totalDuration.sec<10">0</span>{{lap.totalDuration.sec}}</span>:
+                     <span><span ng-if="stopWatch.laps[0].totalDuration.mSec<10">0</span>{{lap.totalDuration.mSec}}</span>
+                 </td>
+                 <td colspan="6">
+                     <span><span ng-if="stopWatch.laps[0].lapDuration.hr<10">0</span>{{lap.lapDuration.hr}}</span>:
+                     <span><span ng-if="stopWatch.laps[0].lapDuration.min<10">0</span>{{lap.lapDuration.min}}</span>:
+                     <span><span ng-if="stopWatch.laps[0].lapDuration.sec<10">0</span>{{lap.lapDuration.sec}}</span>:
+                     <span><span ng-if="stopWatch.laps[0].lapDuration.mSec<10">0</span>{{lap.lapDuration.mSec}}</span>
+                 </td>
+              </tr>
+             </table>
+            <hr/>
+          </div>
+          <div class="center">
+              <button class="btn btn-primary" ng-click="createStopWatch()">Add Stop Watch</button>
+          </div>
+        </div>
+
+         
+      </div>
+      <footer class="footer">
+      <div class="container">
+        <p class="text-muted">&copy; 2015 All rights reserved.</p>
+      </div>
+    </footer>
+</body>
 </html>
